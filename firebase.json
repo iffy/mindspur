@@ -1,6 +1,7 @@
 {
   "firebase": "mindspur",
-  "public": ".",
+  "rules": "config/security-rules.json",
+  "public": "www",
   "ignore": [
     "firebase.json",
     "**/.*",

@@ -4,6 +4,7 @@
   "authors": [
     "Matt Haggard <haggardii@gmail.com>"
   ],
+  "directory": "www/bower_components/",
   "license": "MIT",
   "private": true,
   "ignore": [
