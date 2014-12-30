@@ -1,9 +1,95 @@
 <!doctype html>
-<html>
+<html ng-app="mindspur" ng-controller="MainCtrl as main">
   <head>
     <title>mindspur - spur your mind</title>
+
+    <link href='http://fonts.googleapis.com/css?family=Lato:300,400' rel='stylesheet' type='text/css'>
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/skeleton.css">
+    <link rel="stylesheet" href="css/mindspur.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+    <script src="app.js"></script>
   </head>
   <body>
-    First draft
+
+    <navbar>
+      <div class="left-side">
+        Mindspur
+      </div>
+      <div class="right-side" ng-if="!main.user.data">
+        <a href ng-click="main.show_auth='register'">// Sign up</a>
+        <a href ng-click="main.show_auth='login'" class="button-primary">// Log in</a>
+      </div>
+      <div class="right-side" ng-if="main.user.data">
+        <a href ng-click="main.user.signOut()">// Sign out {{ main.user.data.password.email }}</a>
+      </div>
+    </navbar>
+    
+    <div class="content">
+      {{ main.user.data }}
+    </div>
+
+    
+
+    <div class="auth-pane" ng-if="!main.user.data && main.show_auth">
+      <div class="pane-wrap">
+        <div class="close-button-wrap">
+          <a href class="close-button" ng-click="main.show_auth=''">&#x00d7;</a>
+        </div>
+
+        <div class="pane register-pane" ng-if="main.show_auth=='register'">
+          <div class="title">Sign up</div>
+          <form ng-submit="main.user.register(main.auth_email, auth_password)">
+            <div class="label">Email</div>
+            <input type="email" ng-model="main.auth_email">
+
+            <div class="label">Password</div>
+            <input type="password" ng-model="auth_password" ng-enter>
+            
+            <button type="submit">Sign up</button>
+
+            <a href ng-click="main.show_auth='login'">Already have an account?</a>
+            <a href ng-click="main.show_auth='forgot'">Forgot password?</a>
+          </form>
+        </div>
+
+        <div class="pane login-pane" ng-if="main.show_auth=='login'">
+          <div class="title">Welcome back!</div>
+
+          <form ng-submit="main.user.signIn(main.auth_email, auth_password)">
+            <div class="label">Email</div>
+            <input type="email" ng-model="main.auth_email">
+
+            <div class="label">Password</div>
+            <input type="password" ng-model="auth_password">
+            
+            <button type="submit">Log in</button>
+
+            <a href ng-click="main.show_auth='forgot'">Forgot password?</a>
+            <a href ng-click="main.show_auth='register'">Need to sign up?</a>
+          </form>
+        </div>
+
+        <div class="pane forgot-pane" ng-if="main.show_auth=='forgot'">
+          <div class="title">Forgot password</div>
+
+          <form ng-submit="main.user.signIn(main.auth_email, auth_password)">
+            <div class="label">Email</div>
+            <input type="email" ng-model="main.auth_email">
+            
+            <button type="submit">Send email</button>
+
+            <a href ng-click="main.show_auth='login'">Remembered your password?</a>
+            <a href ng-click="main.show_auth='register'">Need to sign up?</a>
+          </form>
+
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

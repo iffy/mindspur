@@ -1,0 +1,120 @@
+@import "bower_components/bourbon/app/assets/stylesheets/bourbon";
+
+html,
+body {
+  font-family: 'Lato', sans-serif;
+}
+div, * {
+  box-sizing: border-box;
+}
+
+// colors
+$light-grey: #d1d1d1;
+$red: #e74c3c;
+$blue: #3498db;
+$dark-blue: #34495e;
+
+$fast-transition: 0.2s;
+$slow-transition: 0.5s;
+
+$navbar-height: 6rem;
+
+button {
+  background: #fff;
+}
+navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: $navbar-height;
+  width: 100%;
+  border-bottom: 1px solid $light-grey;
+  padding: 1rem 2rem;
+  @include display(flex);
+  @include justify-content(space-between);
+  @include align-items(center);
+  .left-side {
+    @include flex-basis(50%);
+  }
+  .right-side {
+    text-align: right;
+    @include flex-basis(50%);
+  }
+  a {
+    text-decoration: none;
+    padding: 1rem 1rem;
+    color: $blue;
+    &:visited {
+      color: $blue;
+    }
+    &:hover {
+      color: $red;
+    }
+  }
+}
+.content {
+  margin-top: $navbar-height;
+}
+.auth-pane {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background: rgba(255, 255, 255, 0.95);
+  @include display(flex);
+  @include justify-content(center);
+  @include align-items(center);
+  @include flex-direction(column);
+  .pane-wrap {
+
+  }
+  .close-button-wrap {
+    position: relative;
+    color: #000;
+    .close-button {
+      position: absolute;
+      color: #fff;
+      font-size: 4rem;
+      top: 0px;
+      right: 1.5rem;
+      line-height: 5rem;
+      height: 5rem;
+      border-radius: 5rem;
+      text-decoration: none;
+    }
+  }
+  .pane {
+    padding: 3rem 8rem;
+    border-radius: 3px;
+    background: $dark-blue;
+    box-shadow: 0px 1px 13px 2px rgba(0, 0, 0, 0.3);
+    .title {
+      color: #fff;
+      font-size: 3rem;
+      text-align: center;
+      font-weight: 300;
+      letter-spacing: 1px;
+      margin-bottom: 1rem;
+    }
+    .label {
+      color: #fff;
+      letter-spacing: 1px;
+      font-weight: 300;
+    }
+    input,
+    button,
+    a {
+      display: block;
+      width: 100%;
+    }
+
+    a {
+      color: $blue;
+      text-decoration: none;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+  }
+}

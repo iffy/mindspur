@@ -1,0 +1,19 @@
+{
+  "name": "mindspur.git",
+  "version": "0.0.0",
+  "authors": [
+    "Matt Haggard <haggardii@gmail.com>"
+  ],
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bourbon": "~4.1.0"
+  }
+}
