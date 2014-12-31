@@ -52,23 +52,23 @@ navbar {
     }
   }
 }
-.content {
+.content-wrap {
   margin-top: $navbar-height;
+  .padded-content {
+    padding: 3rem 0;
+  }
 }
-.auth-pane {
-  position: fixed;
-  width: 100%;
-  height: 100%;
-  top: 0;
+.modal-wrap {
+  position: relative;
+  //width: 100%;
+  //height: 100%;
+  top: -2rem;
   left: 0;
-  background: rgba(255, 255, 255, 0.95);
+  //background: rgba(255, 255, 255, 0.95);
   @include display(flex);
   @include justify-content(center);
   @include align-items(center);
   @include flex-direction(column);
-  .pane-wrap {
-
-  }
   .close-button-wrap {
     position: relative;
     color: #000;
@@ -84,7 +84,7 @@ navbar {
       text-decoration: none;
     }
   }
-  .pane {
+  .modal {
     padding: 3rem 8rem;
     border-radius: 3px;
     background: $dark-blue;
@@ -117,4 +117,9 @@ navbar {
       }
     }
   }
+}
+
+
+input[disabled] {
+  color: #999;
 }

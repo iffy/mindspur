@@ -1,6 +1,16 @@
 {
   "rules": {
-    ".read": true,
-    ".write": false
+    // User data
+    "users": {
+      "$uid": {
+        // Only the signed-in user can read/write this uid
+        ".read": "auth != null && auth.uid == $uid",
+
+        "name": {
+          ".write": "auth != null && auth.uid == $uid",
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length < 40"
+        }
+      }
+    }
   }
 }

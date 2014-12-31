@@ -1,0 +1,21 @@
+<div class="modal-wrap">
+  <div class="modal">
+
+
+    <div class="title">Sign up</div>
+    <form ng-submit="main.user.register(main.auth_email, auth_password)">
+      <div class="label">Email</div>
+      <input type="email" ng-model="main.auth_email">
+
+      <div class="label">Password</div>
+      <input type="password" ng-model="auth_password" ng-enter>
+      
+      <button type="submit">Sign up</button>
+
+      <a ui-sref="login">Already have an account?</a>
+      <a ui-sref="forgotpassword">Forgot password?</a>
+    </form>
+
+
+  </div>
+</div>

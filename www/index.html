@@ -12,30 +12,28 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.7/angular.min.js"></script>
     <script src="https://cdn.firebase.com/js/client/2.0.6/firebase.js"></script>
     <script src="https://cdn.firebase.com/libs/angularfire/0.9.0/angularfire.min.js"></script>
+    <script src="bower_components/angular-ui-router/release/angular-ui-router.min.js"></script>
     <script src="app.js"></script>
   </head>
   <body>
 
     <navbar>
       <div class="left-side">
-        Mindspur
+        <a ui-sref="home">mindspur</a>
       </div>
-      <div class="right-side" ng-if="!main.user.data">
-        <a href ng-click="main.show_auth='register'">// Sign up</a>
-        <a href ng-click="main.show_auth='login'" class="button-primary">// Log in</a>
+      <div class="right-side" ng-if="!main.user.auth">
+        <a ui-sref="signup">// Sign up</a>
+        <a ui-sref="login">// Log in</a>
       </div>
-      <div class="right-side" ng-if="main.user.data">
-        <a href ng-click="main.user.signOut()">// Sign out {{ main.user.data.password.email }}</a>
+      <div class="right-side" ng-if="main.user.auth">
+        <a href ng-click="main.user.signOut()">// Sign out {{ main.user.auth.password.email }}</a>
       </div>
     </navbar>
     
-    <div class="content">
-      {{ main.user.data }}
-    </div>
+    <div class="content-wrap" ui-view></div>  
 
-    
-
-    <div class="auth-pane" ng-if="!main.user.data && main.show_auth">
+<!--
+    <div class="auth-pane" ng-if="!main.user.auth && main.show_auth">
       <div class="pane-wrap">
         <div class="close-button-wrap">
           <a href class="close-button" ng-click="main.show_auth=''">&#x00d7;</a>
@@ -90,6 +88,7 @@
         </div>
       </div>
     </div>
+-->
 
   </body>
 </html>

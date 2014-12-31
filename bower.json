@@ -4,7 +4,6 @@
   "authors": [
     "Matt Haggard <haggardii@gmail.com>"
   ],
-  "directory": "www/bower_components/",
   "license": "MIT",
   "private": true,
   "ignore": [
@@ -15,6 +14,10 @@
     "tests"
   ],
   "dependencies": {
-    "bourbon": "~4.1.0"
+    "bourbon": "~4.1.0",
+    "angular-ui-router": "~0.2.13"
+  },
+  "devDependencies": {
+    "angular-ui-router": "~0.2.13"
   }
 }

@@ -1,13 +1,52 @@
-var app = angular.module('mindspur', ['firebase']);
+var app = angular.module('mindspur', ['firebase', 'ui.router']);
 
 app.value('FIREBASE_URL', 'https://mindspur.firebaseio.com');
 
-app.factory('User', function(FIREBASE_URL, $firebaseAuth) {
+
+app.config(function($stateProvider, $urlRouterProvider, $locationProvider) {
+  var troot = '/snippets';
+
+  $locationProvider.html5Mode(false).hashPrefix('');
+  $urlRouterProvider.otherwise('/home');
+  $stateProvider
+    .state('home', {
+      url: '/home',
+      templateUrl: troot + '/home.html'
+    })
+    
+
+    // Authentication
+    .state('login', {
+      url: '/auth/login',
+      templateUrl: troot + '/login.html'
+    })
+    .state('signup', {
+      url: '/auth/signup',
+      templateUrl: troot + '/signup.html'
+    })
+    .state('forgotpassword', {
+      url: '/auth/forgot',
+      templateUrl: troot + '/forgotpassword.html'
+    })
+
+    // User-related pages
+    .state('profile', {
+      url: '/my-profile',
+      templateUrl: troot + '/my-profile.html',
+      controller: 'MyProfileCtrl as ctrl'
+    })
+});
+
+
+app.factory('User', function(FIREBASE_URL, $firebaseAuth, $firebase, $state) {
   var User = {
-    data: null,
+    auth: null,
   };
 
   var auth = $firebaseAuth(new Firebase(FIREBASE_URL));
+  User.auth = auth.$getAuth();
+
+  var users = $firebase(new Firebase(FIREBASE_URL + '/users'));
 
   User.register = function(email, password) {
     auth.$createUser(email, password)
@@ -29,7 +68,8 @@ app.factory('User', function(FIREBASE_URL, $firebaseAuth) {
       password: password,
     })
     .then(function(authData) {
-      User.data = authData;
+      User.auth = authData;
+      $state.go('home');
       return authData;
     })
     .catch(function(error) {
@@ -39,10 +79,16 @@ app.factory('User', function(FIREBASE_URL, $firebaseAuth) {
 
   User.signOut = function() {
     auth.$unauth()
-    User.data = null;
+    User.auth = null;
+    $state.go('home');
   }
+
+  User.updateAttributes = function() {
+
+  }
+
   return User;
-})
+});
 
 app.controller('MainCtrl', function(User) {
   var main = this;
@@ -51,5 +97,11 @@ app.controller('MainCtrl', function(User) {
   
   return main;  
 });
+
+
+app.controller('MyProfileCtrl', function(User) {
+  var ctrl = this;
+  return ctrl;
+})
 
 
